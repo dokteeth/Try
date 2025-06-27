@@ -152,6 +152,8 @@
       object-fit: cover;
       display: block;
     }
+
+    /* تصفيف زجاجي موحد للفورم فقط */
     form {
       background: rgba(255, 255, 255, 0.1);
       padding: 25px;
@@ -176,14 +178,9 @@
       width: 100%;
       padding: 10px;
       border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.3);
-      background: rgba(255,255,255,0.15);
-      color: white;
-      font-size: 16px;
+      border: 1px solid #ccc;
       box-sizing: border-box;
-    }
-    input::placeholder, textarea::placeholder {
-      color: rgba(255,255,255,0.7);
+      font-size: 16px;
     }
     button {
       background-color: #F4C542;
@@ -194,10 +191,6 @@
       font-weight: bold;
       border-radius: 6px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #e6b800;
     }
     .popup, .confirmation-popup {
       display: none;
@@ -240,28 +233,30 @@
       list-style-type: disc;
       padding-right: 20px;
     }
-/* تحسين الاستجابة */
-@media screen and (max-width: 600px) {
-  body {
-    padding: 15px;
-  }
-  h2 {
-    font-size: 22px;
-  }
-  form {
-    padding: 20px;
-    max-width: 100%;
-  }
-  input, textarea {
-    font-size: 15px;
-  }
-  button {
-    width: 100%;
-  }
-}
-      </style>
+
+    /* تحسين الاستجابة */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      form {
+        padding: 20px;
+        max-width: 100%;
+      }
+      input, textarea {
+        font-size: 15px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
+
 <div class="hero fade-in">
   <h1>رعاية طبية متميزة لأن <span class="highlight">أسنانك تهمنا</span><br>نمنحك فرصة علاج مجاني تحت إشراف مُختصين</h1>
   <a href="#booking" class="cta-btn">احجز موعدك المجاني </a>
@@ -277,15 +272,17 @@
     </a>
   </div>
 </div>
+
 <section class="section fade-in" id="about">
   <h2>رعاية مجانية ومحترفة لأسنانك</h2>
   <ul>
     <li>هل تبحث عن علاج أسنان موثوق وبدون تكلفة؟</li>
     <li>نقدّم لك خدمة مجانية بإشراف مختصين في طب الأسنان.</li>
     <li>بيئة مريحة وآمنة تضع راحتك أولاً.</li>
-    <li>نحرص على أن تستعيد ابتسامتك بثقة وجودة عالية في كل خطوة.</li>
+        <li>نحرص على أن تستعيد ابتسامتك بثقة وجودة عالية في كل خطوة.</li>
   </ul>
 </section>
+
 <section class="doctor-profile fade-in" id="doctor">
   <div class="doctor-image-container">
     <img src="https://i.ibb.co/cHjy2Bp/IMG-4427.jpg" alt="د. علي الفلاحي" class="doctor-img">
@@ -297,6 +294,7 @@
   <p class="doctor-location"><strong>📍 الموقع:</strong> كربلاء - حي النقيب - شارع النهر</p>
   <p class="doctor-contact"><strong>للتواصل الفوري مع الدكتور:</strong> 07778528881</p>
 </section>
+
 <section class="section fade-in" id="steps">
   <h2>كيف نُجري العلاج؟</h2>
   <ul>
@@ -384,7 +382,6 @@
       visualShake(confirmButton);
     }
 
-    // محاولة إرسال الحجز باستخدام الحساب الرئيسي
     emailjs.sendForm(accountMain.serviceID, accountMain.templateID, form)
       .then(function() {
         showSuccessPopup();
@@ -392,7 +389,6 @@
       .catch(function(error) {
         console.warn("⚠️ فشل الإرسال بالحساب الرئيسي. تجربة الحساب الاحتياطي...", error);
 
-        // محاولة الإرسال بالحساب الاحتياطي
         emailjs.init(accountBackup.userID);
         emailjs.sendForm(accountBackup.serviceID, accountBackup.templateID, form)
           .then(function() {
