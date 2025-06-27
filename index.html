@@ -60,21 +60,24 @@
       z-index: 1;
     }
     .cta-btn:hover { background-color: #e6b800; }
-    .cta-btn::after {
-  content: "";
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.05), transparent);
-  transform: skewX(-20deg);
-  animation: shimmer 4s infinite;
-  z-index: 2;
+    .cta-btn {
+  position: relative; /* يجب أن يكون موجوداً أصلاً */
+  overflow: hidden;
+  z-index: 1;
 }
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 120%; }
-    }
+
+.shimmer {
+  position: absolute;
+  top: 0; left: -30%;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+  transition: left 0.2s ease-out;
+  will-change: left;
+}
     .social-container {
       margin-top: 40px;
       padding: 15px 10px;
@@ -308,7 +311,7 @@
 
 <div class="hero fade-in">
   <h1>رعاية طبية متميزة لأن <span class="highlight">أسنانك تهمنا</span><br>نمنحك فرصة علاج مجاني تحت إشراف مُختصين</h1>
-  <a href="#booking" class="cta-btn">احجز موعدك المجاني </a>
+  <a href="#booking" class="cta-btn">احجز موعدك المجاني <span class="shimmer"></span></a>
   <div class="social-container">
     <a href="whatsapp://send?phone=+9647778528881"><img src="https://img.icons8.com/ios-filled/50/0074b7/whatsapp.png" alt="WhatsApp" /></a>
     <a href="instagram://user?username=dokteeth"><img src="https://img.icons8.com/ios-filled/50/0074b7/instagram-new.png" alt="Instagram" /></a>
@@ -503,6 +506,19 @@
   faders.forEach(fader => appearOnScroll.observe(fader));
   glassBoxes.forEach(box => appearOnScroll.observe(box));
 
+  
+window.addEventListener('scroll', () => {
+  // حساب نسبة التمرير من 0 إلى 1
+  const scrollPercent = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+
+  // تحريك الوميض من -30% إلى 100%
+  const leftPos = -30 + scrollPercent * 130;
+  
+  const shimmer = document.querySelector('.shimmer');
+  if (shimmer) {
+    shimmer.style.left = leftPos + '%';
+  }
+});
 </script>
   
 </body>
