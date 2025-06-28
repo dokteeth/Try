@@ -28,21 +28,22 @@
       margin-bottom: 30px;
     }
     .highlight {
-      animation: goldPulse 2.8s infinite alternate;
-    }
-    @keyframes goldPulse {
-      from {
-        color: #F4C542;
-        text-shadow: 0 0 6px rgba(244, 197, 66, 0.6);
-      }
-      to {
-        color: #FFD700;
-        text-shadow:
-          0 0 15px rgba(255, 215, 0, 1),
-          0 0 25px rgba(255, 215, 0, 0.8),
-          0 0 40px rgba(255, 215, 0, 0.6);
-      }
-    }
+  animation: goldPulse 2.8s infinite alternate;
+}
+
+@keyframes goldPulse {
+  from {
+    color: #F4C542;
+    text-shadow: 0 0 6px rgba(244, 197, 66, 0.6);
+  }
+  to {
+    color: #FFD700;
+    text-shadow:
+      0 0 15px rgba(255, 215, 0, 1),
+      0 0 25px rgba(255, 215, 0, 0.8),
+      0 0 40px rgba(255, 215, 0, 0.6);
+  }
+}
     .cta-btn {
       background-color: #F4C542;
       color: #0A3D62;
@@ -55,32 +56,31 @@
       transition: background-color 0.3s ease;
       text-decoration: none;
       display: inline-block;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
     }
     .cta-btn:hover { background-color: #e6b800; }
-    .cta-btn::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-      transform: skewX(-20deg);
-      animation: shimmer 2.5s infinite;
-      z-index: 2;
-    }
-    @keyframes shimmer {
-      0% { left: -100%; }
-      100% { left: 120%; }
-    }
     .social-container {
       margin-top: 40px;
       padding: 15px 10px;
       border-radius: 20px;
       display: inline-flex;
       gap: 18px;
+    }
+    .fade-out {
+      animation: fadeOut 4s forwards;
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; filter: blur(0px); }
+      to { opacity: 0; filter: blur(2px); }
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+    .shake {
+      animation: shake 0.4s ease-in-out;
     }
     .social-container img {
       width: 28px;
@@ -123,47 +123,226 @@
       transform: translateY(30px);
       transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
+    #popup {
+      position: fixed;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 25px 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+      color: #F4C542;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    #popup.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
     .fade-in.appear {
       opacity: 1;
       transform: translateY(0);
     }
-    .about-image-wrapper {
-      position: relative;
-      margin-top: 30px;
-      height: 220px;
-      display: flex;
-      justify-content: center;
-      z-index: 1;
-    }
-    .about-floating-image {
-      max-width: 90%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-      position: absolute;
-      top: 0;
-      transform: translateY(30%);
-      transition: transform 0.4s ease;
-      pointer-events: none;
-    }
-    .shimmer-effect {
-      position: relative;
+    .doctor-image-container {
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
       overflow: hidden;
-      z-index: 1;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
     }
-    .shimmer-effect::after {
-      content: "";
-      position: absolute;
-      top: 0; left: -60%;
-      width: 50%;
+    .doctor-img {
+      width: 100%;
       height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.2), transparent);
-      transform: skewX(-20deg);
-      animation: shimmer 4s infinite;
-      z-index: 2;
-      pointer-events: none;
+      object-fit: cover;
+      display: block;
     }
+
+    /* تصفيف زجاجي موحد للفورم فقط */
+    form {
+  padding: 20px 15px; /* زيادة التباعد الداخلي */
+  border-radius: 12px;
+  box-shadow: none;
+  background: none
+  backdrop-filter: none
+  -webkit-backdrop-filter: none;
+  border: none;
+  max-width: 500px;
+  margin: 20px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* تباعد أكبر بين الحقول */
+  font-family: 'Cairo', sans-serif;
+  color: white;
+}
+
+form label {
+  color: #F4C542;
+  font-weight: bold;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 10px 12px; /* توسيع الحقول من الداخل */
+  border-radius: 6px;
+  border: none; /* إزالة الحدود لمظهر أنظف */
+  background-color: rgba(255, 255, 255, 0.2); /* خلفية شبه شفافة */
+  box-sizing: border-box;
+  font-size: 16px; /* تكبير النص داخل الحقول */
+  color: white;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #ddd; /* لون رمادي للنص الوصفي */
+}
+    button {
+      background-color: #F4C542;
+      color: #0A3D62;
+      border: none;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .popup, .confirmation-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 25px 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-align: center;
+      color: #F4C542;
+      z-index: 1000;
+    }
+    .confirmation-popup button {
+      margin: 10px;
+      background: #0A3D62;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-weight: bold;
+    }
+    footer {
+      background-color: #0A3D62;
+      color: #F4C542;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 1.1rem;
+    }
+    ul {
+      list-style-type: disc;
+      padding-right: 20px;
+    }
+
+    /* تحسين الاستجابة */
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 15px;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      form {
+        padding: 20px;
+        max-width: 100%;
+      }
+      input, textarea {
+        font-size: 15px;
+      }
+      button {
+        width: 100%;
+      }
+    }
+    .cta-btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.cta-btn::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: skewX(-20deg);
+  animation: shimmer 2.5s infinite;
+  z-index: 2;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 120%; }
+}
+    .custom-dropdown {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 12px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  user-select: none;
+}
+
+.custom-dropdown .selected {
+  font-weight: bold;
+  color: #F4C542;
+}
+
+.custom-dropdown .options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.custom-dropdown .options div {
+  padding: 10px;
+  color: white;
+  font-size: 15px;
+}
+
+.custom-dropdown .options div:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
   </style>
 </head>
 <body>
@@ -190,14 +369,10 @@
     <li>هل تبحث عن علاج أسنان موثوق وبدون تكلفة؟</li>
     <li>نقدّم لك خدمة مجانية بإشراف مختصين في طب الأسنان.</li>
     <li>بيئة مريحة وآمنة تضع راحتك أولاً.</li>
-    <li>نحرص على أن تستعيد ابتسامتك بثقة وجودة عالية في كل خطوة.</li>
+        <li>نحرص على أن تستعيد ابتسامتك بثقة وجودة عالية في كل خطوة.</li>
   </ul>
-
-  <!-- ✅ صورة توضيحية عائمة -->
-  <div class="about-image-wrapper fade-in">
-    <img src="https://i.ibb.co/RGG3jGJR/F6-D85-ABB-EBA6-4-F4-F-84-BF-8384-AFA3-C8-CC.png" alt="صورة توضيحية" class="about-floating-image shimmer-effect">
-  </div>
 </section>
+
 <section class="doctor-profile fade-in" id="doctor">
   <div class="doctor-image-container">
     <img src="https://i.ibb.co/cHjy2Bp/IMG-4427.jpg" alt="د. علي الفلاحي" class="doctor-img">
@@ -231,13 +406,16 @@
     <label>تاريخ الحجز:</label>
     <input type="text" name="booking_date" placeholder="الشهر/اليوم (تاريخ تقترحه ممكن يتغير)">
     <label>الوقت:</label>
-    <select name="booking_time">
-      <option value="none">اختر وقت الموعد</option>
-      <option>8:30 - 9:30 صباحاً</option>
-      <option>9:30 - 10:30 صباحاً</option>
-      <option>10:30 - 11:30 صباحاً</option>
-      <option>11:30 - 12:30 ظهراً</option>
-    </select>
+<div id="custom-time-dropdown" class="custom-dropdown">
+  <div class="selected">اختر وقت الموعد</div>
+  <div class="options">
+    <div data-value="8:30 - 9:30 صباحاً">8:30 - 9:30 صباحاً</div>
+    <div data-value="9:30 - 10:30 صباحاً">9:30 - 10:30 صباحاً</div>
+    <div data-value="10:30 - 11:30 صباحاً">10:30 - 11:30 صباحاً</div>
+    <div data-value="11:30 - 12:3 ظهراً">11:30 - 12:3 ظهراً</div>
+  </div>
+  <input type="hidden" name="booking_time" required>
+</div>
     <label>ما مشكلتك؟</label>
     <textarea name="user_problem" rows="4" required></textarea>
     <button type="submit" class="cta-btn">إرسال الحجز</button>
@@ -255,7 +433,8 @@
 </div>
 
 <div id="popup" class="popup">شكراً لثقتك، نحرص على أن تكون في محلها.</div>
-  <script>
+
+<script>
   const form = document.getElementById("booking-form");
   const confirmationPopup = document.getElementById("confirmation-popup");
 
@@ -341,7 +520,7 @@
     confirmationPopup.style.display = "none";
   }
 
-  // ✅ مراقبة عناصر scroll (fade-in)
+  // ✅ تعديل حركة fade-in / fade-out مستمرة
   const faders = document.querySelectorAll('.fade-in');
   const appearOptions = { threshold: 0.2 };
 
@@ -356,6 +535,28 @@
   }, appearOptions);
 
   faders.forEach(fader => appearOnScroll.observe(fader));
+  const dropdown = document.getElementById("custom-time-dropdown");
+const selected = dropdown.querySelector(".selected");
+const options = dropdown.querySelector(".options");
+const hiddenInput = dropdown.querySelector("input");
+
+dropdown.addEventListener("click", function () {
+  options.style.display = options.style.display === "block" ? "none" : "block";
+});
+
+options.querySelectorAll("div").forEach(option => {
+  option.addEventListener("click", function () {
+    selected.textContent = this.textContent;
+    hiddenInput.value = this.dataset.value;
+    options.style.display = "none";
+  });
+});
+
+document.addEventListener("click", function (e) {
+  if (!dropdown.contains(e.target)) {
+    options.style.display = "none";
+  }
+});
 </script>
   
 </body>
