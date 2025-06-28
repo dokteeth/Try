@@ -9,16 +9,14 @@
   <style>
     html { scroll-behavior: smooth; }
     body {
-  background: linear-gradient(-45deg, #1B4332, #2D6A4F, #1B4332);
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
-  font-family: 'Cairo', sans-serif;
-  color: #333333;
-  margin: 0;
-  padding: 0;
-}
+      background-color: #0A3D62;
+      font-family: 'Cairo', sans-serif;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
     .hero {
-      background-color: #1B4332;
+      background-color: #0A3D62;
       color: white;
       text-align: center;
       padding: 60px 20px;
@@ -48,7 +46,7 @@
 }
     .cta-btn {
       background-color: #F4C542;
-      color: #1B4332;
+      color: #0A3D62;
       font-weight: bold;
       padding: 15px 30px;
       font-size: 1.1rem;
@@ -84,35 +82,10 @@
     .shake {
       animation: shake 0.4s ease-in-out;
     }
-    .social-icon {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  width: 32px;
-  height: 32px;
-}
-
-.social-icon img {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  z-index: 1;
-  filter: brightness(1.5); /* درجة أفتح */
-}
-
-.shimmer-icon {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 150%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-  transform: skewX(-20deg);
-  animation: shimmerMove 3.5s infinite;
-  z-index: 2;
-  pointer-events: none;
-}
+    .social-container img {
+      width: 28px;
+      height: 28px;
+    }
     .location {
       margin-top: 40px;
       text-align: center;
@@ -273,7 +246,7 @@ textarea::placeholder {
       font-weight: bold;
     }
     footer {
-      background-color: #1B4332;
+      background-color: #0A3D62;
       color: #F4C542;
       text-align: center;
       padding: 25px 15px;
@@ -325,19 +298,6 @@ textarea::placeholder {
   0% { left: -100%; }
   100% { left: 120%; }
 }
-    @keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-    @keyframes shimmerMove {
-  0% {
-    left: -75%;
-  }
-  100% {
-    left: 125%;
-  }
-}
   </style>
 </head>
 <body>
@@ -346,19 +306,10 @@ textarea::placeholder {
   <h1>رعاية طبية متميزة لأن <span class="highlight">أسنانك تهمنا</span><br>نمنحك فرصة علاج مجاني تحت إشراف مُختصين</h1>
   <a href="#booking" class="cta-btn">احجز موعدك المجاني </a>
   <div class="social-container">
-  <a href="https://facebook.com" class="social-icon">
-    <img src="facebook.svg">
-    <span class="shimmer-icon"></span>
-  </a>
-  <a href="https://instagram.com" class="social-icon">
-    <img src="instagram.svg">
-    <span class="shimmer-icon"></span>
-  </a>
-  <a href="https://wa.me/" class="social-icon">
-    <img src="whatsapp.svg">
-    <span class="shimmer-icon"></span>
-  </a>
-</div>
+    <a href="whatsapp://send?phone=+9647778528881"><img src="https://img.icons8.com/ios-filled/50/0074b7/whatsapp.png" alt="WhatsApp" /></a>
+    <a href="instagram://user?username=dokteeth"><img src="https://img.icons8.com/ios-filled/50/0074b7/instagram-new.png" alt="Instagram" /></a>
+    <a href="fb://facewebmodal/f?href=https://www.facebook.com/share/16NMrSGoFf/?mibextid=wwXIfr"><img src="https://img.icons8.com/ios-filled/50/0074b7/facebook-new.png" alt="Facebook" /></a>
+  </div>
   <div class="location">
     <p>📍 الموقع</p>
     <a href="https://maps.app.goo.gl/FyWzZcS7jxWwci2z7?g_st=com.google.maps.preview.copy" target="_blank">
