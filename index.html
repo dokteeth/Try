@@ -9,12 +9,14 @@
   <style>
     html { scroll-behavior: smooth; }
     body {
-      background-color: #0A3D62;
-      font-family: 'Cairo', sans-serif;
-      color: #333333;
-      margin: 0;
-      padding: 0;
-    }
+  background: linear-gradient(-45deg, #1B4332, #2D6A4F, #1B4332);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  font-family: 'Cairo', sans-serif;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+}
     .hero {
       background-color: #0A3D62;
       color: white;
@@ -297,6 +299,11 @@ textarea::placeholder {
 @keyframes shimmer {
   0% { left: -100%; }
   100% { left: 120%; }
+}
+    @keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
   </style>
 </head>
