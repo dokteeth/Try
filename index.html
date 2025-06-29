@@ -250,6 +250,35 @@
         width: 100%;
       }
     }
+    .image-effect-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.interactive-image {
+  width: 90%;
+  max-width: 600px;
+  border-radius: 16px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+/* عند النقر */
+.interactive-image.clicked {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(244, 197, 66, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+  animation: shimmer-light 1s ease-in-out;
+}
+
+/* تأثير الضوء المتحرك */
+@keyframes shimmer-light {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.4); }
+  100% { filter: brightness(1); }
+}
   </style>
 </head>
 <body>
@@ -281,8 +310,8 @@
 </section>
 
 <!-- ✅ تم إدراج الصورة هنا حسب طلبك -->
-<div class="patient-photo-container fade-in">
-  <img src="https://i.ibb.co/RGG3jGJR/F6-D85-ABB-EBA6-4-F4-F-84-BF-8384-AFA3-C8-CC.png" alt="مريض سعيد بعد العلاج" class="patient-photo">
+<div class="image-effect-container fade-in" onclick="triggerImageEffect(this)">
+  <img src="https://i.ibb.co/RGG3jGJR/F6-D85-ABB-EBA6-4-F4-F-84-BF-8384-AFA3-C8-CC.png" alt="ابتسامة المريض" class="interactive-image" />
 </div>
 
 <section class="doctor-profile fade-in" id="doctor">
@@ -444,6 +473,13 @@
   }, appearOptions);
 
   faders.forEach(fader => appearOnScroll.observe(fader));
+  function triggerImageEffect(element) {
+  const img = element.querySelector("img");
+  img.classList.add("clicked");
+  setTimeout(() => {
+    img.classList.remove("clicked");
+  }, 1000);
+}
 </script>
   
 </body>
