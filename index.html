@@ -22,6 +22,7 @@
       text-align: center;
       padding: 60px 20px;
     }
+
     .hero h1 {
       font-size: 1.8rem;
       font-weight: 700;
@@ -40,10 +41,9 @@
       }
       to {
         color: #FFD700;
-        text-shadow:
-          0 0 15px rgba(255, 215, 0, 1),
-          0 0 25px rgba(255, 215, 0, 0.8),
-          0 0 40px rgba(255, 215, 0, 0.6);
+        text-shadow: 0 0 15px rgba(255, 215, 0, 1),
+                     0 0 25px rgba(255, 215, 0, 0.8),
+                     0 0 40px rgba(255, 215, 0, 0.6);
       }
     }
 
@@ -56,7 +56,6 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
       text-decoration: none;
       display: inline-block;
       position: relative;
@@ -151,138 +150,51 @@
       transform: translateY(0);
     }
 
-    .doctor-image-container {
-      width: 160px;
-      height: 160px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    }
-
-    .doctor-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .patient-photo-container {
+    .image-glass-wrapper {
       max-width: 600px;
-      margin: 0 auto 30px;
-      padding: 0 15px;
+      margin: 40px auto 0;
+      position: relative;
     }
 
-    .patient-photo {
+    .glass-box-behind {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      border-radius: 14px;
+      height: 55%;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      z-index: 1;
+    }
+
+    .interactive-image {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      z-index: 2;
+      cursor: pointer;
       display: block;
     }
 
-    form {
-      padding: 20px 15px;
-      border-radius: 12px;
-      background: none;
-      border: none;
-      max-width: 500px;
-      margin: 20px auto 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-family: 'Cairo', sans-serif;
-      color: white;
+    .interactive-image.clicked {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(244, 197, 66, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
+      animation: shimmer-light 1s ease-in-out;
     }
 
-    form label {
-      color: #F4C542;
-      font-weight: bold;
+    @keyframes shimmer-light {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+      100% { filter: brightness(1); }
     }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 6px;
-      border: none;
-      background-color: rgba(255, 255, 255, 0.2);
-      font-size: 16px;
-      color: white;
-    }
-
-    input::placeholder, textarea::placeholder {
-      color: #ddd;
-    }
-
-    button {
-      background-color: #F4C542;
-      color: #0A3D62;
-      border: none;
-      padding: 12px;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    footer {
-      background-color: #0A3D62;
-      color: #F4C542;
-      text-align: center;
-      padding: 25px 15px;
-      font-size: 1.1rem;
-    }
-
-    @media screen and (max-width: 600px) {
-      body {
-        padding: 15px;
-      }
-      h2 {
-        font-size: 22px;
-      }
-      form {
-        padding: 20px;
-        max-width: 100%;
-      }
-      input, textarea {
-        font-size: 15px;
-      }
-      button {
-        width: 100%;
-      }
-    }
-    .image-effect-container {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.interactive-image {
-  width: 90%;
-  max-width: 600px;
-  border-radius: 16px;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  cursor: pointer;
-}
-
-/* عند النقر */
-.interactive-image.clicked {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(244, 197, 66, 0.5), 0 0 40px rgba(255, 215, 0, 0.3);
-  animation: shimmer-light 1s ease-in-out;
-}
-
-/* تأثير الضوء المتحرك */
-@keyframes shimmer-light {
-  0% { filter: brightness(1); }
-  50% { filter: brightness(1.4); }
-  100% { filter: brightness(1); }
-}
   </style>
 </head>
 <body>
-
 <div class="hero fade-in">
   <h1>رعاية طبية متميزة لأن <span class="highlight">أسنانك تهمنا</span><br>نمنحك فرصة علاج مجاني تحت إشراف مُختصين</h1>
   <a href="#booking" class="cta-btn">احجز موعدك المجاني </a>
@@ -293,7 +205,7 @@
   </div>
   <div class="location">
     <p>📍 الموقع</p>
-    <a href="https://maps.app.goo.gl/FyWzZcS7jxWwci2z7?g_st=com.google.maps.preview.copy" target="_blank">
+    <a href="https://maps.app.goo.gl/FyWzZcS7jxWwci2z7" target="_blank">
       <img src="https://img.icons8.com/ios-filled/50/0074b7/marker.png" alt="Map" />
     </a>
   </div>
@@ -309,9 +221,10 @@
   </ul>
 </section>
 
-<!-- ✅ تم إدراج الصورة هنا حسب طلبك -->
-<div class="image-effect-container fade-in" onclick="triggerImageEffect(this)">
-  <img src="https://i.ibb.co/RGG3jGJR/F6-D85-ABB-EBA6-4-F4-F-84-BF-8384-AFA3-C8-CC.png" alt="ابتسامة المريض" class="interactive-image" />
+<!-- ✅ صورة مستطيلة مع مربع زجاجي خلف الجزء العلوي -->
+<div class="image-glass-wrapper fade-in" onclick="triggerImageEffect(this)">
+  <div class="glass-box-behind"></div>
+  <img src="https://i.ibb.co/RGG3jGJR/F6-D85-ABB-EBA6-4-F4-F-84-BF-8384-AFA3-C8-CC.png" alt="ابتسامة مريض" class="interactive-image">
 </div>
 
 <section class="doctor-profile fade-in" id="doctor">
@@ -364,14 +277,12 @@
   <p>جميع الحقوق محفوظة لـ© د. علي الفلاحي</p>
 </footer>
 
-<!-- نافذة تأكيد الإرسال -->
+<!-- نوافذ التأكيد -->
 <div id="confirmation-popup" class="confirmation-popup">
   <p>هل أنت متأكد من إرسال الحجز؟</p>
   <button onclick="confirmSend()">تأكيد</button>
   <button onclick="cancelSend()">إلغاء</button>
 </div>
-
-<!-- نافذة شكر بعد الإرسال -->
 <div id="popup" class="popup">شكراً لثقتك، نحرص على أن تكون في محلها.</div>
 
 <script>
@@ -392,13 +303,6 @@
 
   emailjs.init(accountMain.userID);
 
-  function visualShake(element) {
-    element.classList.add("shake");
-    setTimeout(() => {
-      element.classList.remove("shake");
-    }, 400);
-  }
-
   form.addEventListener("submit", function(e) {
     e.preventDefault();
     confirmationPopup.style.display = "block";
@@ -411,59 +315,47 @@
 
     if (navigator.vibrate && /android/i.test(navigator.userAgent)) {
       navigator.vibrate(200);
-    } else {
-      visualShake(confirmButton);
     }
 
     emailjs.sendForm(accountMain.serviceID, accountMain.templateID, form)
       .then(function() {
         showSuccessPopup();
       })
-      .catch(function(error) {
-        console.warn("⚠️ فشل الإرسال بالحساب الرئيسي. تجربة الحساب الاحتياطي...", error);
-
+      .catch(function() {
         emailjs.init(accountBackup.userID);
         emailjs.sendForm(accountBackup.serviceID, accountBackup.templateID, form)
-          .then(function() {
-            showSuccessPopup();
-          })
-          .catch(function(finalError) {
+          .then(() => showSuccessPopup())
+          .catch(() => {
             alert("❌ حدث خطأ في كلا الحسابين. حاول مرة أخرى.");
-            console.error(finalError);
             confirmationPopup.classList.remove("fade-out");
             confirmButton.disabled = false;
           });
       });
   }
 
+  function cancelSend() {
+    confirmationPopup.style.display = "none";
+  }
+
   function showSuccessPopup() {
     confirmationPopup.style.display = "none";
     confirmationPopup.classList.remove("fade-out");
-
     const popup = document.getElementById("popup");
     popup.style.display = "block";
     popup.classList.add("show");
-
     setTimeout(() => {
       popup.classList.remove("show");
       setTimeout(() => {
         popup.style.display = "none";
       }, 500);
     }, 8000);
-
     form.reset();
     const confirmButton = confirmationPopup.querySelector("button");
     confirmButton.disabled = false;
   }
 
-  function cancelSend() {
-    confirmationPopup.style.display = "none";
-  }
-
-  // تفعيل ظهور تدريجي عند التمرير
   const faders = document.querySelectorAll('.fade-in');
   const appearOptions = { threshold: 0.2 };
-
   const appearOnScroll = new IntersectionObserver(function(entries) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -473,16 +365,15 @@
       }
     });
   }, appearOptions);
-
   faders.forEach(fader => appearOnScroll.observe(fader));
-  function triggerImageEffect(element) {
-  const img = element.querySelector("img");
-  img.classList.add("clicked");
-  setTimeout(() => {
-    img.classList.remove("clicked");
-  }, 1000);
-}
-</script>
 
+  function triggerImageEffect(element) {
+    const img = element.querySelector("img");
+    img.classList.add("clicked");
+    setTimeout(() => {
+      img.classList.remove("clicked");
+    }, 1000);
+  }
+</script>
 </body>
 </html>
