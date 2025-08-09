@@ -9,105 +9,133 @@
   <style>
     html { scroll-behavior: smooth; }
     body {
-      background-color: #0A3D62;
+      background: linear-gradient(135deg, #0A3D62, #1B6CA8);
       font-family: 'Cairo', sans-serif;
-      color: #333333;
+      color: #fff;
       margin: 0;
       padding: 0;
+      overflow-x: hidden;
     }
+
+    /* تأثيرات عامة */
+    .fade-in {
+      opacity: 0;
+      transform: scale(0.95) translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .fade-in.appear {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .zoom-hover {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .zoom-hover:hover {
+      transform: scale(1.08) rotate(1deg);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+
+    /* Hero مع Parallax */
     .hero {
-      background-color: #0A3D62;
+      background: linear-gradient(to bottom right, rgba(10, 61, 98, 0.9), rgba(27, 108, 168, 0.9)), url('https://i.ibb.co/cHjy2Bp/IMG-4427.jpg') center/cover fixed;
       color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 50px;
+      background: linear-gradient(to top, rgba(10, 61, 98, 1), transparent);
     }
     .hero h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
       line-height: 1.8;
       margin-bottom: 30px;
+      animation: fadeSlide 1.2s ease-out forwards;
     }
-    .highlight {
-  animation: goldPulse 2.8s infinite alternate;
-}
 
-@keyframes goldPulse {
-  from {
-    color: #F4C542;
-    text-shadow: 0 0 6px rgba(244, 197, 66, 0.6);
-  }
-  to {
-    color: #FFD700;
-    text-shadow:
-      0 0 15px rgba(255, 215, 0, 1),
-      0 0 25px rgba(255, 215, 0, 0.8),
-      0 0 40px rgba(255, 215, 0, 0.6);
-  }
-}
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .highlight {
+      animation: goldPulse 2.8s infinite alternate;
+    }
+    @keyframes goldPulse {
+      from {
+        color: #F4C542;
+        text-shadow: 0 0 6px rgba(244, 197, 66, 0.6);
+      }
+      to {
+        color: #FFD700;
+        text-shadow:
+          0 0 15px rgba(255, 215, 0, 1),
+          0 0 25px rgba(255, 215, 0, 0.8),
+          0 0 40px rgba(255, 215, 0, 0.6);
+      }
+    }
+
+    /* زر بإضاءة متحركة */
     .cta-btn {
-      background-color: #F4C542;
+      background: linear-gradient(90deg, #F4C542, #FFD700);
       color: #0A3D62;
       font-weight: bold;
-      padding: 15px 30px;
+      padding: 15px 35px;
       font-size: 1.1rem;
       border: none;
-      border-radius: 10px;
+      border-radius: 50px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
       text-decoration: none;
       display: inline-block;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255,215,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .cta-btn:hover { background-color: #e6b800; }
-    .social-container {
-      margin-top: 40px;
-      padding: 15px 10px;
-      border-radius: 20px;
-      display: inline-flex;
-      gap: 18px;
+    .cta-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(255,215,0,0.9);
     }
-    .fade-out {
-      animation: fadeOut 4s forwards;
+    .cta-btn::after {
+      content: "";
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-20deg);
+      animation: shimmer 2.5s infinite;
     }
-    @keyframes fadeOut {
-      from { opacity: 1; filter: blur(0px); }
-      to { opacity: 0; filter: blur(2px); }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 120%; }
     }
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-      100% { transform: translateX(0); }
-    }
-    .shake {
-      animation: shake 0.4s ease-in-out;
-    }
-    .social-container img {
-      width: 28px;
-      height: 28px;
-    }
-    .location {
-      margin-top: 40px;
-      text-align: center;
-    }
-    .location p {
-      color: #ffffff;
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-    .location img { width: 42px; }
+
+    /* أقسام */
     .section, .doctor-profile {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
       border-radius: 18px;
       border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
       margin: 20px auto;
       padding: 25px 20px;
-      max-width: 600px;
+      max-width: 650px;
       line-height: 1.8;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    .section:hover, .doctor-profile:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+    }
+
     .section h2, .doctor-name {
       color: #F4C542;
       font-size: 1.6rem;
@@ -118,40 +146,8 @@
       font-size: 1.1rem;
       color: white;
     }
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-    #popup {
-      position: fixed;
-      top: 50%;
-      right: 50%;
-      transform: translate(50%, -50%);
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 25px 20px;
-      border-radius: 12px;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-align: center;
-      color: #F4C542;
-      z-index: 1000;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    #popup.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .fade-in.appear {
-      opacity: 1;
-      transform: translateY(0);
-    }
+
+    /* صورة الطبيب */
     .doctor-image-container {
       width: 160px;
       height: 160px;
@@ -165,86 +161,49 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.4s ease;
+    }
+    .doctor-img:hover {
+      transform: scale(1.1) rotate(1deg);
     }
 
-    /* تصفيف زجاجي موحد للفورم فقط */
+    /* الفورم */
     form {
-  padding: 20px 15px; /* زيادة التباعد الداخلي */
-  border-radius: 12px;
-  box-shadow: none;
-  background: none
-  backdrop-filter: none
-  -webkit-backdrop-filter: none;
-  border: none;
-  max-width: 500px;
-  margin: 20px auto 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px; /* تباعد أكبر بين الحقول */
-  font-family: 'Cairo', sans-serif;
-  color: white;
-}
-
-form label {
-  color: #F4C542;
-  font-weight: bold;
-}
-
-input, textarea, select {
-  width: 100%;
-  padding: 10px 12px; /* توسيع الحقول من الداخل */
-  border-radius: 6px;
-  border: none; /* إزالة الحدود لمظهر أنظف */
-  background-color: rgba(255, 255, 255, 0.2); /* خلفية شبه شفافة */
-  box-sizing: border-box;
-  font-size: 16px; /* تكبير النص داخل الحقول */
-  color: white;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #ddd; /* لون رمادي للنص الوصفي */
-}
-    button {
-      background-color: #F4C542;
-      color: #0A3D62;
-      border: none;
-      padding: 12px;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    .popup, .confirmation-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      right: 50%;
-      transform: translate(50%, -50%);
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 25px 20px;
+      padding: 20px 15px;
       border-radius: 12px;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
-      font-weight: bold;
-      font-size: 1.2rem;
-      text-align: center;
-      color: #F4C542;
-      z-index: 1000;
-    }
-    .confirmation-popup button {
-      margin: 10px;
-      background: #0A3D62;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
+      max-width: 500px;
+      margin: 20px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       font-family: 'Cairo', sans-serif;
+      color: white;
+    }
+    form label {
+      color: #F4C542;
       font-weight: bold;
     }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.2);
+      box-sizing: border-box;
+      font-size: 16px;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    input:focus, textarea:focus, select:focus {
+      background-color: rgba(255,255,255,0.3);
+      outline: none;
+    }
+    input::placeholder,
+    textarea::placeholder {
+      color: #ddd;
+    }
+
+    /* الفوتر */
     footer {
       background-color: #0A3D62;
       color: #F4C542;
@@ -252,59 +211,24 @@ textarea::placeholder {
       padding: 25px 15px;
       font-size: 1.1rem;
     }
-    ul {
-      list-style-type: disc;
-      padding-right: 20px;
+
+    /* أيقونات التواصل */
+    .social-container img {
+      width: 32px;
+      height: 32px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .social-container img:hover {
+      transform: scale(1.2);
+      filter: brightness(1.4);
     }
 
     /* تحسين الاستجابة */
     @media screen and (max-width: 600px) {
-      body {
-        padding: 15px;
-      }
-      h2 {
-        font-size: 22px;
-      }
-      form {
-        padding: 20px;
-        max-width: 100%;
-      }
-      input, textarea {
-        font-size: 15px;
-      }
-      button {
-        width: 100%;
-      }
+      h2 { font-size: 22px; }
+      form { padding: 20px; max-width: 100%; }
+      button { width: 100%; }
     }
-    .cta-btn {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.cta-btn::after {
-  content: "";
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
-  transform: skewX(-20deg);
-  animation: shimmer 2.5s infinite;
-  z-index: 2;
-}
-
-@keyframes shimmer {
-  0% { left: -100%; }
-  100% { left: 120%; }
-}
-    .custom-dropdown .options div {
-  padding: 10px 12px;
-  color: white;
-  font-size: 15px;
-  text-align: left;
-  direction: rtl;
-}
   </style>
 </head>
 <body>
